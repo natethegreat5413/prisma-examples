@@ -6,7 +6,7 @@
       If you need to change it, you should use the --compiler-options or provide a separate 
       tsconfig.json entirely.
     */
-    "module": "esnext",
+    "module": "commonjs",
     "target": "ES2019",
     "lib": [
       "dom",

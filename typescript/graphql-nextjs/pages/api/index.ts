@@ -13,20 +13,49 @@ import prisma from '../../lib/prisma'
 
 export const GQLDate = asNexusMethod(GraphQLDate, 'date')
 
+const Profile = objectType({
+  name: 'Profile',
+  definition(t) {
+    t.nonNull.int('id')
+    t.string('bio')
+    t.field('user', {
+      type: 'User',
+      resolve: (parent, _, context) => {
+        return context.prisma.profile
+          .findUnique({
+            where: { id: parent.id || undefined },
+          })
+          .user()
+      },
+    })
+  },
+})
+
 const User = objectType({
   name: 'User',
   definition(t) {
-    t.int('id')
+    t.nonNull.int('id')
     t.string('name')
-    t.string('email')
-    t.list.field('posts', {
+    t.nonNull.string('email')
+    t.nonNull.list.nonNull.field('posts', {
       type: 'Post',
-      resolve: (parent) =>
-        prisma.user
+      resolve: (parent, _, context) => {
+        return context.prisma.user
           .findUnique({
-            where: { id: Number(parent.id) },
+            where: { id: parent.id || undefined },
           })
-          .posts(),
+          .posts()
+      },
+    })
+    t.field('profile', {
+      type: 'Profile',
+      resolve: (parent, _, context) => {
+        return context.prisma.user
+          .findUnique({
+            where: { id: parent.id },
+          })
+          .profile()
+      },
     })
   },
 })
@@ -80,6 +109,12 @@ const Query = objectType({
         return prisma.post.findMany({
           where: { published: false },
         })
+      },
+    })
+    t.list.field('users', {
+      type: 'User',
+      resolve: (_parent, _args, context) => {
+        return prisma.user.findMany()
       },
     })
 
@@ -166,11 +201,36 @@ const Mutation = objectType({
         })
       },
     })
+    t.field('createNewProfile', {
+      type: 'Profile',
+      args: {
+        bio: stringArg(),
+      },
+    })
+    t.field('addProfileForUser', {
+      type: 'Profile',
+      args: {
+        email: stringArg(),
+        bio: stringArg(),
+      },
+      resolve: async (_, args, context) => {
+        return context.prisma.profile.create({
+          data: {
+            bio: args.bio,
+            user: {
+              connect: {
+                email: args.email || undefined,
+              },
+            },
+          },
+        })
+      },
+    })
   },
 })
 
 export const schema = makeSchema({
-  types: [Query, Mutation, Post, User, GQLDate],
+  types: [Query, Mutation, Post, User, Profile, GQLDate],
   outputs: {
     typegen: path.join(process.cwd(), 'pages/api/nexus-typegen.ts'),
     schema: path.join(process.cwd(), 'pages/api/schema.graphql'),

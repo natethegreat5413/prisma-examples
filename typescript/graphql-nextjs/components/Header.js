@@ -33,6 +33,9 @@ const Header = () => {
         <Link href="/create">
           <a data-active={isActive("/create")}>+ Create draft</a>
         </Link>
+        <Link href="/user">
+          <a data-active={isActive("/user")}>Create User</a>
+        </Link>
       </div>
       <style jsx>{`
         nav {
