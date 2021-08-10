@@ -140,6 +140,25 @@ const Query = objectType({
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
+    t.field('addProfileForUser', {
+      type: 'Profile',
+      args: {
+        email: stringArg(),
+        bio: stringArg(),
+      },
+      resolve: async (_, args, context) => {
+        return context.prisma.profile.create({
+          data: {
+            bio: args.bio,
+            user: {
+              connect: {
+                email: args.email || null,
+              },
+            },
+          },
+        })
+      },
+    })
     t.field('signupUser', {
       type: 'User',
       args: {
@@ -205,25 +224,6 @@ const Mutation = objectType({
       type: 'Profile',
       args: {
         bio: stringArg(),
-      },
-    })
-    t.field('addProfileForUser', {
-      type: 'Profile',
-      args: {
-        email: stringArg(),
-        bio: stringArg(),
-      },
-      resolve: async (_, args, context) => {
-        return context.prisma.profile.create({
-          data: {
-            bio: args.bio,
-            user: {
-              connect: {
-                email: args.email || undefined,
-              },
-            },
-          },
-        })
       },
     })
   },
