@@ -9,25 +9,28 @@ datasource db {
 }
 
 model User {
-  email   String    @unique
-  id      Int       @id @default(autoincrement())
-  name    String?
-  posts   Post[]
-  Profile Profile[]
+  id         Int         @id @default(autoincrement())
+  timesheets TimeSheet[]
+  crumbs     Crumb[]
+  name       String?
 }
 
-model Post {
-  authorId  Int?
-  content   String?
-  id        Int     @id @default(autoincrement())
-  published Boolean @default(false)
-  title     String
-  author    User?   @relation(fields: [authorId], references: [id])
+model TimeSheet {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  crumbs    Crumb[]
+  startTime DateTime
+  endTime   DateTime
+  userId    Int
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model Crumb {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id])
+  timeSheet   TimeSheet @relation(fields: [timeSheetId], references: [id])
+  lat         Float
+  lng         Float
+  timeStamp   DateTime
+  userId      Int
+  timeSheetId Int
 }

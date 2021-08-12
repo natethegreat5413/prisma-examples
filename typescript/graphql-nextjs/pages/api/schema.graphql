@@ -2,46 +2,609 @@
 ### Do not make changes to this file directly
 
 
+type AffectedRowsOutput {
+  count: Int!
+}
+
+type Crumb {
+  id: Int!
+  lat: Float!
+  lng: Float!
+  timeSheet: TimeSheet!
+  timeStamp: DateTime!
+  user: User!
+}
+
+input CrumbCreateInput {
+  lat: Float!
+  lng: Float!
+  timeSheet: TimeSheetCreateNestedOneWithoutCrumbsInput!
+  timeStamp: DateTime!
+  user: UserCreateNestedOneWithoutCrumbsInput!
+}
+
+input CrumbCreateManyTimeSheetInput {
+  id: Int
+  lat: Float!
+  lng: Float!
+  timeStamp: DateTime!
+  userId: Int!
+}
+
+input CrumbCreateManyTimeSheetInputEnvelope {
+  data: [CrumbCreateManyTimeSheetInput!]
+  skipDuplicates: Boolean
+}
+
+input CrumbCreateManyUserInput {
+  id: Int
+  lat: Float!
+  lng: Float!
+  timeSheetId: Int!
+  timeStamp: DateTime!
+}
+
+input CrumbCreateManyUserInputEnvelope {
+  data: [CrumbCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input CrumbCreateNestedManyWithoutTimeSheetInput {
+  connect: [CrumbWhereUniqueInput!]
+  connectOrCreate: [CrumbCreateOrConnectWithoutTimeSheetInput!]
+  create: [CrumbCreateWithoutTimeSheetInput!]
+  createMany: CrumbCreateManyTimeSheetInputEnvelope
+}
+
+input CrumbCreateNestedManyWithoutUserInput {
+  connect: [CrumbWhereUniqueInput!]
+  connectOrCreate: [CrumbCreateOrConnectWithoutUserInput!]
+  create: [CrumbCreateWithoutUserInput!]
+  createMany: CrumbCreateManyUserInputEnvelope
+}
+
+input CrumbCreateOrConnectWithoutTimeSheetInput {
+  create: CrumbCreateWithoutTimeSheetInput!
+  where: CrumbWhereUniqueInput!
+}
+
+input CrumbCreateOrConnectWithoutUserInput {
+  create: CrumbCreateWithoutUserInput!
+  where: CrumbWhereUniqueInput!
+}
+
+input CrumbCreateWithoutTimeSheetInput {
+  lat: Float!
+  lng: Float!
+  timeStamp: DateTime!
+  user: UserCreateNestedOneWithoutCrumbsInput!
+}
+
+input CrumbCreateWithoutUserInput {
+  lat: Float!
+  lng: Float!
+  timeSheet: TimeSheetCreateNestedOneWithoutCrumbsInput!
+  timeStamp: DateTime!
+}
+
+input CrumbListRelationFilter {
+  every: CrumbWhereInput
+  none: CrumbWhereInput
+  some: CrumbWhereInput
+}
+
+input CrumbOrderByInput {
+  id: SortOrder
+  lat: SortOrder
+  lng: SortOrder
+  timeSheetId: SortOrder
+  timeStamp: SortOrder
+  userId: SortOrder
+}
+
+input CrumbScalarWhereInput {
+  AND: [CrumbScalarWhereInput!]
+  NOT: [CrumbScalarWhereInput!]
+  OR: [CrumbScalarWhereInput!]
+  id: IntFilter
+  lat: FloatFilter
+  lng: FloatFilter
+  timeSheetId: IntFilter
+  timeStamp: DateTimeFilter
+  userId: IntFilter
+}
+
+input CrumbUpdateInput {
+  lat: FloatFieldUpdateOperationsInput
+  lng: FloatFieldUpdateOperationsInput
+  timeSheet: TimeSheetUpdateOneRequiredWithoutCrumbsInput
+  timeStamp: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCrumbsInput
+}
+
+input CrumbUpdateManyMutationInput {
+  lat: FloatFieldUpdateOperationsInput
+  lng: FloatFieldUpdateOperationsInput
+  timeStamp: DateTimeFieldUpdateOperationsInput
+}
+
+input CrumbUpdateManyWithWhereWithoutTimeSheetInput {
+  data: CrumbUpdateManyMutationInput!
+  where: CrumbScalarWhereInput!
+}
+
+input CrumbUpdateManyWithWhereWithoutUserInput {
+  data: CrumbUpdateManyMutationInput!
+  where: CrumbScalarWhereInput!
+}
+
+input CrumbUpdateManyWithoutTimeSheetInput {
+  connect: [CrumbWhereUniqueInput!]
+  connectOrCreate: [CrumbCreateOrConnectWithoutTimeSheetInput!]
+  create: [CrumbCreateWithoutTimeSheetInput!]
+  createMany: CrumbCreateManyTimeSheetInputEnvelope
+  delete: [CrumbWhereUniqueInput!]
+  deleteMany: [CrumbScalarWhereInput!]
+  disconnect: [CrumbWhereUniqueInput!]
+  set: [CrumbWhereUniqueInput!]
+  update: [CrumbUpdateWithWhereUniqueWithoutTimeSheetInput!]
+  updateMany: [CrumbUpdateManyWithWhereWithoutTimeSheetInput!]
+  upsert: [CrumbUpsertWithWhereUniqueWithoutTimeSheetInput!]
+}
+
+input CrumbUpdateManyWithoutUserInput {
+  connect: [CrumbWhereUniqueInput!]
+  connectOrCreate: [CrumbCreateOrConnectWithoutUserInput!]
+  create: [CrumbCreateWithoutUserInput!]
+  createMany: CrumbCreateManyUserInputEnvelope
+  delete: [CrumbWhereUniqueInput!]
+  deleteMany: [CrumbScalarWhereInput!]
+  disconnect: [CrumbWhereUniqueInput!]
+  set: [CrumbWhereUniqueInput!]
+  update: [CrumbUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CrumbUpdateManyWithWhereWithoutUserInput!]
+  upsert: [CrumbUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CrumbUpdateWithWhereUniqueWithoutTimeSheetInput {
+  data: CrumbUpdateWithoutTimeSheetInput!
+  where: CrumbWhereUniqueInput!
+}
+
+input CrumbUpdateWithWhereUniqueWithoutUserInput {
+  data: CrumbUpdateWithoutUserInput!
+  where: CrumbWhereUniqueInput!
+}
+
+input CrumbUpdateWithoutTimeSheetInput {
+  lat: FloatFieldUpdateOperationsInput
+  lng: FloatFieldUpdateOperationsInput
+  timeStamp: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCrumbsInput
+}
+
+input CrumbUpdateWithoutUserInput {
+  lat: FloatFieldUpdateOperationsInput
+  lng: FloatFieldUpdateOperationsInput
+  timeSheet: TimeSheetUpdateOneRequiredWithoutCrumbsInput
+  timeStamp: DateTimeFieldUpdateOperationsInput
+}
+
+input CrumbUpsertWithWhereUniqueWithoutTimeSheetInput {
+  create: CrumbCreateWithoutTimeSheetInput!
+  update: CrumbUpdateWithoutTimeSheetInput!
+  where: CrumbWhereUniqueInput!
+}
+
+input CrumbUpsertWithWhereUniqueWithoutUserInput {
+  create: CrumbCreateWithoutUserInput!
+  update: CrumbUpdateWithoutUserInput!
+  where: CrumbWhereUniqueInput!
+}
+
+input CrumbWhereInput {
+  AND: [CrumbWhereInput!]
+  NOT: [CrumbWhereInput!]
+  OR: [CrumbWhereInput!]
+  id: IntFilter
+  lat: FloatFilter
+  lng: FloatFilter
+  timeSheet: TimeSheetWhereInput
+  timeSheetId: IntFilter
+  timeStamp: DateTimeFilter
+  user: UserWhereInput
+  userId: IntFilter
+}
+
+input CrumbWhereUniqueInput {
+  id: Int
+}
+
 """
-A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
-scalar Date
+scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input FloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
+input FloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
 
 type Mutation {
-  addProfileForUser(bio: String, email: String): Profile
-  createDraft(authorEmail: String, content: String, title: String!): Post
-  createNewProfile(bio: String): Profile
-  deletePost(postId: String): Post
-  publish(postId: String): Post
-  signupUser(email: String!, name: String): User
+  createOneCrumb(data: CrumbCreateInput!): Crumb!
+  createOneTimeSheet(data: TimeSheetCreateInput!): TimeSheet!
+  createOneUser(data: UserCreateInput!): User!
+  deleteManyCrumb(where: CrumbWhereInput): AffectedRowsOutput!
+  deleteManyTimeSheet(where: TimeSheetWhereInput): AffectedRowsOutput!
+  deleteOneCrumb(where: CrumbWhereUniqueInput!): Crumb
+  deleteOneTimeSheet(where: TimeSheetWhereUniqueInput!): TimeSheet
+  deleteOneUser(where: UserWhereUniqueInput!): User
+  updateManyCrumb(data: CrumbUpdateManyMutationInput!, where: CrumbWhereInput): AffectedRowsOutput!
+  updateManyTimeSheet(data: TimeSheetUpdateManyMutationInput!, where: TimeSheetWhereInput): AffectedRowsOutput!
+  updateOneCrumb(data: CrumbUpdateInput!, where: CrumbWhereUniqueInput!): Crumb
+  updateOneTimeSheet(data: TimeSheetUpdateInput!, where: TimeSheetWhereUniqueInput!): TimeSheet
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
-type Post {
-  author: User
-  content: String
-  id: Int
-  published: Boolean
-  title: String
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
 }
 
-type Profile {
-  bio: String
-  id: Int!
-  user: User
+input NestedFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
 }
 
 type Query {
-  drafts: [Post]
-  feed: [Post]
-  filterPosts(searchString: String): [Post]
-  post(postId: String!): Post
-  users: [User]
+  crumb(where: CrumbWhereUniqueInput!): Crumb
+  crumbs(after: CrumbWhereUniqueInput, before: CrumbWhereUniqueInput, first: Int, last: Int, orderBy: [CrumbOrderByInput!], where: CrumbWhereInput): [Crumb!]!
+  timeSheet(where: TimeSheetWhereUniqueInput!): TimeSheet
+  timeSheets(after: TimeSheetWhereUniqueInput, before: TimeSheetWhereUniqueInput, first: Int, last: Int, orderBy: [TimeSheetOrderByInput!], where: TimeSheetWhereInput): [TimeSheet!]!
+  user(where: UserWhereUniqueInput!): User
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+type TimeSheet {
+  crumbs(after: CrumbWhereUniqueInput, before: CrumbWhereUniqueInput, first: Int, last: Int): [Crumb!]!
+  elapsedTime: Int
+  endTime: DateTime!
+  id: Int!
+  startTime: DateTime!
+  user: User!
+}
+
+input TimeSheetCreateInput {
+  crumbs: CrumbCreateNestedManyWithoutTimeSheetInput
+  elapsedTime: DateTime!
+  endTime: DateTime!
+  startTime: DateTime!
+  user: UserCreateNestedOneWithoutTimesheetsInput!
+}
+
+input TimeSheetCreateManyUserInput {
+  elapsedTime: DateTime!
+  endTime: DateTime!
+  id: Int
+  startTime: DateTime!
+}
+
+input TimeSheetCreateManyUserInputEnvelope {
+  data: [TimeSheetCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input TimeSheetCreateNestedManyWithoutUserInput {
+  connect: [TimeSheetWhereUniqueInput!]
+  connectOrCreate: [TimeSheetCreateOrConnectWithoutUserInput!]
+  create: [TimeSheetCreateWithoutUserInput!]
+  createMany: TimeSheetCreateManyUserInputEnvelope
+}
+
+input TimeSheetCreateNestedOneWithoutCrumbsInput {
+  connect: TimeSheetWhereUniqueInput
+  connectOrCreate: TimeSheetCreateOrConnectWithoutCrumbsInput
+  create: TimeSheetCreateWithoutCrumbsInput
+}
+
+input TimeSheetCreateOrConnectWithoutCrumbsInput {
+  create: TimeSheetCreateWithoutCrumbsInput!
+  where: TimeSheetWhereUniqueInput!
+}
+
+input TimeSheetCreateOrConnectWithoutUserInput {
+  create: TimeSheetCreateWithoutUserInput!
+  where: TimeSheetWhereUniqueInput!
+}
+
+input TimeSheetCreateWithoutCrumbsInput {
+  elapsedTime: DateTime!
+  endTime: DateTime!
+  startTime: DateTime!
+  user: UserCreateNestedOneWithoutTimesheetsInput!
+}
+
+input TimeSheetCreateWithoutUserInput {
+  crumbs: CrumbCreateNestedManyWithoutTimeSheetInput
+  elapsedTime: DateTime!
+  endTime: DateTime!
+  startTime: DateTime!
+}
+
+input TimeSheetListRelationFilter {
+  every: TimeSheetWhereInput
+  none: TimeSheetWhereInput
+  some: TimeSheetWhereInput
+}
+
+input TimeSheetOrderByInput {
+  elapsedTime: SortOrder
+  endTime: SortOrder
+  id: SortOrder
+  startTime: SortOrder
+  userId: SortOrder
+}
+
+input TimeSheetScalarWhereInput {
+  AND: [TimeSheetScalarWhereInput!]
+  NOT: [TimeSheetScalarWhereInput!]
+  OR: [TimeSheetScalarWhereInput!]
+  elapsedTime: DateTimeFilter
+  endTime: DateTimeFilter
+  id: IntFilter
+  startTime: DateTimeFilter
+  userId: IntFilter
+}
+
+input TimeSheetUpdateInput {
+  crumbs: CrumbUpdateManyWithoutTimeSheetInput
+  elapsedTime: DateTimeFieldUpdateOperationsInput
+  endTime: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTimesheetsInput
+}
+
+input TimeSheetUpdateManyMutationInput {
+  elapsedTime: DateTimeFieldUpdateOperationsInput
+  endTime: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
+}
+
+input TimeSheetUpdateManyWithWhereWithoutUserInput {
+  data: TimeSheetUpdateManyMutationInput!
+  where: TimeSheetScalarWhereInput!
+}
+
+input TimeSheetUpdateManyWithoutUserInput {
+  connect: [TimeSheetWhereUniqueInput!]
+  connectOrCreate: [TimeSheetCreateOrConnectWithoutUserInput!]
+  create: [TimeSheetCreateWithoutUserInput!]
+  createMany: TimeSheetCreateManyUserInputEnvelope
+  delete: [TimeSheetWhereUniqueInput!]
+  deleteMany: [TimeSheetScalarWhereInput!]
+  disconnect: [TimeSheetWhereUniqueInput!]
+  set: [TimeSheetWhereUniqueInput!]
+  update: [TimeSheetUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [TimeSheetUpdateManyWithWhereWithoutUserInput!]
+  upsert: [TimeSheetUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TimeSheetUpdateOneRequiredWithoutCrumbsInput {
+  connect: TimeSheetWhereUniqueInput
+  connectOrCreate: TimeSheetCreateOrConnectWithoutCrumbsInput
+  create: TimeSheetCreateWithoutCrumbsInput
+  update: TimeSheetUpdateWithoutCrumbsInput
+  upsert: TimeSheetUpsertWithoutCrumbsInput
+}
+
+input TimeSheetUpdateWithWhereUniqueWithoutUserInput {
+  data: TimeSheetUpdateWithoutUserInput!
+  where: TimeSheetWhereUniqueInput!
+}
+
+input TimeSheetUpdateWithoutCrumbsInput {
+  elapsedTime: DateTimeFieldUpdateOperationsInput
+  endTime: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTimesheetsInput
+}
+
+input TimeSheetUpdateWithoutUserInput {
+  crumbs: CrumbUpdateManyWithoutTimeSheetInput
+  elapsedTime: DateTimeFieldUpdateOperationsInput
+  endTime: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
+}
+
+input TimeSheetUpsertWithWhereUniqueWithoutUserInput {
+  create: TimeSheetCreateWithoutUserInput!
+  update: TimeSheetUpdateWithoutUserInput!
+  where: TimeSheetWhereUniqueInput!
+}
+
+input TimeSheetUpsertWithoutCrumbsInput {
+  create: TimeSheetCreateWithoutCrumbsInput!
+  update: TimeSheetUpdateWithoutCrumbsInput!
+}
+
+input TimeSheetWhereInput {
+  AND: [TimeSheetWhereInput!]
+  NOT: [TimeSheetWhereInput!]
+  OR: [TimeSheetWhereInput!]
+  crumbs: CrumbListRelationFilter
+  elapsedTime: DateTimeFilter
+  endTime: DateTimeFilter
+  id: IntFilter
+  startTime: DateTimeFilter
+  user: UserWhereInput
+  userId: IntFilter
+}
+
+input TimeSheetWhereUniqueInput {
+  id: Int
 }
 
 type User {
-  email: String!
+  crumbs(after: CrumbWhereUniqueInput, before: CrumbWhereUniqueInput, first: Int, last: Int): [Crumb!]!
   id: Int!
-  name: String
-  posts: [Post!]!
-  profile: Profile
+  timesheets(after: TimeSheetWhereUniqueInput, before: TimeSheetWhereUniqueInput, first: Int, last: Int): [TimeSheet!]!
+}
+
+input UserCreateInput {
+  crumbs: CrumbCreateNestedManyWithoutUserInput
+  timesheets: TimeSheetCreateNestedManyWithoutUserInput
+}
+
+input UserCreateNestedOneWithoutCrumbsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCrumbsInput
+  create: UserCreateWithoutCrumbsInput
+}
+
+input UserCreateNestedOneWithoutTimesheetsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTimesheetsInput
+  create: UserCreateWithoutTimesheetsInput
+}
+
+input UserCreateOrConnectWithoutCrumbsInput {
+  create: UserCreateWithoutCrumbsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutTimesheetsInput {
+  create: UserCreateWithoutTimesheetsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutCrumbsInput {
+  timesheets: TimeSheetCreateNestedManyWithoutUserInput
+}
+
+input UserCreateWithoutTimesheetsInput {
+  crumbs: CrumbCreateNestedManyWithoutUserInput
+}
+
+input UserOrderByInput {
+  id: SortOrder
+}
+
+input UserUpdateInput {
+  crumbs: CrumbUpdateManyWithoutUserInput
+  timesheets: TimeSheetUpdateManyWithoutUserInput
+}
+
+input UserUpdateOneRequiredWithoutCrumbsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCrumbsInput
+  create: UserCreateWithoutCrumbsInput
+  update: UserUpdateWithoutCrumbsInput
+  upsert: UserUpsertWithoutCrumbsInput
+}
+
+input UserUpdateOneRequiredWithoutTimesheetsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTimesheetsInput
+  create: UserCreateWithoutTimesheetsInput
+  update: UserUpdateWithoutTimesheetsInput
+  upsert: UserUpsertWithoutTimesheetsInput
+}
+
+input UserUpdateWithoutCrumbsInput {
+  timesheets: TimeSheetUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutTimesheetsInput {
+  crumbs: CrumbUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutCrumbsInput {
+  create: UserCreateWithoutCrumbsInput!
+  update: UserUpdateWithoutCrumbsInput!
+}
+
+input UserUpsertWithoutTimesheetsInput {
+  create: UserCreateWithoutTimesheetsInput!
+  update: UserUpdateWithoutTimesheetsInput!
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  crumbs: CrumbListRelationFilter
+  id: IntFilter
+  timesheets: TimeSheetListRelationFilter
+}
+
+input UserWhereUniqueInput {
+  id: Int
 }

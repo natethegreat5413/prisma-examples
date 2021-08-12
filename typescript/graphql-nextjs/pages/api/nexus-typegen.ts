@@ -4,33 +4,492 @@
  */
 
 
-import { core } from "nexus"
-declare global {
-  interface NexusGenCustomInputMethods<TypeName extends string> {
-    /**
-     * A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-     */
-    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Date";
-  }
-}
-declare global {
-  interface NexusGenCustomOutputMethods<TypeName extends string> {
-    /**
-     * A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-     */
-    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Date";
-  }
-}
 
+
+
+declare global {
+  interface NexusGenCustomOutputProperties<TypeName extends string> {
+    crud: NexusPrisma<TypeName, 'crud'>
+    model: NexusPrisma<TypeName, 'model'>
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
+  CrumbCreateInput: { // input type
+    lat: number; // Float!
+    lng: number; // Float!
+    timeSheet: NexusGenInputs['TimeSheetCreateNestedOneWithoutCrumbsInput']; // TimeSheetCreateNestedOneWithoutCrumbsInput!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenInputs['UserCreateNestedOneWithoutCrumbsInput']; // UserCreateNestedOneWithoutCrumbsInput!
+  }
+  CrumbCreateManyTimeSheetInput: { // input type
+    id?: number | null; // Int
+    lat: number; // Float!
+    lng: number; // Float!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+    userId: number; // Int!
+  }
+  CrumbCreateManyTimeSheetInputEnvelope: { // input type
+    data?: NexusGenInputs['CrumbCreateManyTimeSheetInput'][] | null; // [CrumbCreateManyTimeSheetInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  CrumbCreateManyUserInput: { // input type
+    id?: number | null; // Int
+    lat: number; // Float!
+    lng: number; // Float!
+    timeSheetId: number; // Int!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+  }
+  CrumbCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['CrumbCreateManyUserInput'][] | null; // [CrumbCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  CrumbCreateNestedManyWithoutTimeSheetInput: { // input type
+    connect?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['CrumbCreateOrConnectWithoutTimeSheetInput'][] | null; // [CrumbCreateOrConnectWithoutTimeSheetInput!]
+    create?: NexusGenInputs['CrumbCreateWithoutTimeSheetInput'][] | null; // [CrumbCreateWithoutTimeSheetInput!]
+    createMany?: NexusGenInputs['CrumbCreateManyTimeSheetInputEnvelope'] | null; // CrumbCreateManyTimeSheetInputEnvelope
+  }
+  CrumbCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['CrumbCreateOrConnectWithoutUserInput'][] | null; // [CrumbCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['CrumbCreateWithoutUserInput'][] | null; // [CrumbCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['CrumbCreateManyUserInputEnvelope'] | null; // CrumbCreateManyUserInputEnvelope
+  }
+  CrumbCreateOrConnectWithoutTimeSheetInput: { // input type
+    create: NexusGenInputs['CrumbCreateWithoutTimeSheetInput']; // CrumbCreateWithoutTimeSheetInput!
+    where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+  }
+  CrumbCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['CrumbCreateWithoutUserInput']; // CrumbCreateWithoutUserInput!
+    where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+  }
+  CrumbCreateWithoutTimeSheetInput: { // input type
+    lat: number; // Float!
+    lng: number; // Float!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenInputs['UserCreateNestedOneWithoutCrumbsInput']; // UserCreateNestedOneWithoutCrumbsInput!
+  }
+  CrumbCreateWithoutUserInput: { // input type
+    lat: number; // Float!
+    lng: number; // Float!
+    timeSheet: NexusGenInputs['TimeSheetCreateNestedOneWithoutCrumbsInput']; // TimeSheetCreateNestedOneWithoutCrumbsInput!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+  }
+  CrumbListRelationFilter: { // input type
+    every?: NexusGenInputs['CrumbWhereInput'] | null; // CrumbWhereInput
+    none?: NexusGenInputs['CrumbWhereInput'] | null; // CrumbWhereInput
+    some?: NexusGenInputs['CrumbWhereInput'] | null; // CrumbWhereInput
+  }
+  CrumbOrderByInput: { // input type
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    lat?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    lng?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    timeSheetId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    timeStamp?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  CrumbScalarWhereInput: { // input type
+    AND?: NexusGenInputs['CrumbScalarWhereInput'][] | null; // [CrumbScalarWhereInput!]
+    NOT?: NexusGenInputs['CrumbScalarWhereInput'][] | null; // [CrumbScalarWhereInput!]
+    OR?: NexusGenInputs['CrumbScalarWhereInput'][] | null; // [CrumbScalarWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    lat?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    lng?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    timeSheetId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    timeStamp?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  CrumbUpdateInput: { // input type
+    lat?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    lng?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    timeSheet?: NexusGenInputs['TimeSheetUpdateOneRequiredWithoutCrumbsInput'] | null; // TimeSheetUpdateOneRequiredWithoutCrumbsInput
+    timeStamp?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutCrumbsInput'] | null; // UserUpdateOneRequiredWithoutCrumbsInput
+  }
+  CrumbUpdateManyMutationInput: { // input type
+    lat?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    lng?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    timeStamp?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  CrumbUpdateManyWithWhereWithoutTimeSheetInput: { // input type
+    data: NexusGenInputs['CrumbUpdateManyMutationInput']; // CrumbUpdateManyMutationInput!
+    where: NexusGenInputs['CrumbScalarWhereInput']; // CrumbScalarWhereInput!
+  }
+  CrumbUpdateManyWithWhereWithoutUserInput: { // input type
+    data: NexusGenInputs['CrumbUpdateManyMutationInput']; // CrumbUpdateManyMutationInput!
+    where: NexusGenInputs['CrumbScalarWhereInput']; // CrumbScalarWhereInput!
+  }
+  CrumbUpdateManyWithoutTimeSheetInput: { // input type
+    connect?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['CrumbCreateOrConnectWithoutTimeSheetInput'][] | null; // [CrumbCreateOrConnectWithoutTimeSheetInput!]
+    create?: NexusGenInputs['CrumbCreateWithoutTimeSheetInput'][] | null; // [CrumbCreateWithoutTimeSheetInput!]
+    createMany?: NexusGenInputs['CrumbCreateManyTimeSheetInputEnvelope'] | null; // CrumbCreateManyTimeSheetInputEnvelope
+    delete?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['CrumbScalarWhereInput'][] | null; // [CrumbScalarWhereInput!]
+    disconnect?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    set?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    update?: NexusGenInputs['CrumbUpdateWithWhereUniqueWithoutTimeSheetInput'][] | null; // [CrumbUpdateWithWhereUniqueWithoutTimeSheetInput!]
+    updateMany?: NexusGenInputs['CrumbUpdateManyWithWhereWithoutTimeSheetInput'][] | null; // [CrumbUpdateManyWithWhereWithoutTimeSheetInput!]
+    upsert?: NexusGenInputs['CrumbUpsertWithWhereUniqueWithoutTimeSheetInput'][] | null; // [CrumbUpsertWithWhereUniqueWithoutTimeSheetInput!]
+  }
+  CrumbUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['CrumbCreateOrConnectWithoutUserInput'][] | null; // [CrumbCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['CrumbCreateWithoutUserInput'][] | null; // [CrumbCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['CrumbCreateManyUserInputEnvelope'] | null; // CrumbCreateManyUserInputEnvelope
+    delete?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['CrumbScalarWhereInput'][] | null; // [CrumbScalarWhereInput!]
+    disconnect?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    set?: NexusGenInputs['CrumbWhereUniqueInput'][] | null; // [CrumbWhereUniqueInput!]
+    update?: NexusGenInputs['CrumbUpdateWithWhereUniqueWithoutUserInput'][] | null; // [CrumbUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['CrumbUpdateManyWithWhereWithoutUserInput'][] | null; // [CrumbUpdateManyWithWhereWithoutUserInput!]
+    upsert?: NexusGenInputs['CrumbUpsertWithWhereUniqueWithoutUserInput'][] | null; // [CrumbUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  CrumbUpdateWithWhereUniqueWithoutTimeSheetInput: { // input type
+    data: NexusGenInputs['CrumbUpdateWithoutTimeSheetInput']; // CrumbUpdateWithoutTimeSheetInput!
+    where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+  }
+  CrumbUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['CrumbUpdateWithoutUserInput']; // CrumbUpdateWithoutUserInput!
+    where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+  }
+  CrumbUpdateWithoutTimeSheetInput: { // input type
+    lat?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    lng?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    timeStamp?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutCrumbsInput'] | null; // UserUpdateOneRequiredWithoutCrumbsInput
+  }
+  CrumbUpdateWithoutUserInput: { // input type
+    lat?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    lng?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    timeSheet?: NexusGenInputs['TimeSheetUpdateOneRequiredWithoutCrumbsInput'] | null; // TimeSheetUpdateOneRequiredWithoutCrumbsInput
+    timeStamp?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  CrumbUpsertWithWhereUniqueWithoutTimeSheetInput: { // input type
+    create: NexusGenInputs['CrumbCreateWithoutTimeSheetInput']; // CrumbCreateWithoutTimeSheetInput!
+    update: NexusGenInputs['CrumbUpdateWithoutTimeSheetInput']; // CrumbUpdateWithoutTimeSheetInput!
+    where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+  }
+  CrumbUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['CrumbCreateWithoutUserInput']; // CrumbCreateWithoutUserInput!
+    update: NexusGenInputs['CrumbUpdateWithoutUserInput']; // CrumbUpdateWithoutUserInput!
+    where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+  }
+  CrumbWhereInput: { // input type
+    AND?: NexusGenInputs['CrumbWhereInput'][] | null; // [CrumbWhereInput!]
+    NOT?: NexusGenInputs['CrumbWhereInput'][] | null; // [CrumbWhereInput!]
+    OR?: NexusGenInputs['CrumbWhereInput'][] | null; // [CrumbWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    lat?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    lng?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    timeSheet?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
+    timeSheetId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    timeStamp?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  CrumbWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  DateTimeFieldUpdateOperationsInput: { // input type
+    set?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  DateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  FloatFieldUpdateOperationsInput: { // input type
+    decrement?: number | null; // Float
+    divide?: number | null; // Float
+    increment?: number | null; // Float
+    multiply?: number | null; // Float
+    set?: number | null; // Float
+  }
+  FloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  IntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NestedDateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  NestedFloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  NestedIntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  TimeSheetCreateInput: { // input type
+    crumbs?: NexusGenInputs['CrumbCreateNestedManyWithoutTimeSheetInput'] | null; // CrumbCreateNestedManyWithoutTimeSheetInput
+    elapsedTime: NexusGenScalars['DateTime']; // DateTime!
+    endTime: NexusGenScalars['DateTime']; // DateTime!
+    startTime: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenInputs['UserCreateNestedOneWithoutTimesheetsInput']; // UserCreateNestedOneWithoutTimesheetsInput!
+  }
+  TimeSheetCreateManyUserInput: { // input type
+    elapsedTime: NexusGenScalars['DateTime']; // DateTime!
+    endTime: NexusGenScalars['DateTime']; // DateTime!
+    id?: number | null; // Int
+    startTime: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TimeSheetCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['TimeSheetCreateManyUserInput'][] | null; // [TimeSheetCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  TimeSheetCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['TimeSheetWhereUniqueInput'][] | null; // [TimeSheetWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['TimeSheetCreateOrConnectWithoutUserInput'][] | null; // [TimeSheetCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['TimeSheetCreateWithoutUserInput'][] | null; // [TimeSheetCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['TimeSheetCreateManyUserInputEnvelope'] | null; // TimeSheetCreateManyUserInputEnvelope
+  }
+  TimeSheetCreateNestedOneWithoutCrumbsInput: { // input type
+    connect?: NexusGenInputs['TimeSheetWhereUniqueInput'] | null; // TimeSheetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TimeSheetCreateOrConnectWithoutCrumbsInput'] | null; // TimeSheetCreateOrConnectWithoutCrumbsInput
+    create?: NexusGenInputs['TimeSheetCreateWithoutCrumbsInput'] | null; // TimeSheetCreateWithoutCrumbsInput
+  }
+  TimeSheetCreateOrConnectWithoutCrumbsInput: { // input type
+    create: NexusGenInputs['TimeSheetCreateWithoutCrumbsInput']; // TimeSheetCreateWithoutCrumbsInput!
+    where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+  }
+  TimeSheetCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['TimeSheetCreateWithoutUserInput']; // TimeSheetCreateWithoutUserInput!
+    where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+  }
+  TimeSheetCreateWithoutCrumbsInput: { // input type
+    elapsedTime: NexusGenScalars['DateTime']; // DateTime!
+    endTime: NexusGenScalars['DateTime']; // DateTime!
+    startTime: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenInputs['UserCreateNestedOneWithoutTimesheetsInput']; // UserCreateNestedOneWithoutTimesheetsInput!
+  }
+  TimeSheetCreateWithoutUserInput: { // input type
+    crumbs?: NexusGenInputs['CrumbCreateNestedManyWithoutTimeSheetInput'] | null; // CrumbCreateNestedManyWithoutTimeSheetInput
+    elapsedTime: NexusGenScalars['DateTime']; // DateTime!
+    endTime: NexusGenScalars['DateTime']; // DateTime!
+    startTime: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TimeSheetListRelationFilter: { // input type
+    every?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
+    none?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
+    some?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
+  }
+  TimeSheetOrderByInput: { // input type
+    elapsedTime?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    endTime?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    startTime?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  TimeSheetScalarWhereInput: { // input type
+    AND?: NexusGenInputs['TimeSheetScalarWhereInput'][] | null; // [TimeSheetScalarWhereInput!]
+    NOT?: NexusGenInputs['TimeSheetScalarWhereInput'][] | null; // [TimeSheetScalarWhereInput!]
+    OR?: NexusGenInputs['TimeSheetScalarWhereInput'][] | null; // [TimeSheetScalarWhereInput!]
+    elapsedTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    endTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    startTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  TimeSheetUpdateInput: { // input type
+    crumbs?: NexusGenInputs['CrumbUpdateManyWithoutTimeSheetInput'] | null; // CrumbUpdateManyWithoutTimeSheetInput
+    elapsedTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    endTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    startTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutTimesheetsInput'] | null; // UserUpdateOneRequiredWithoutTimesheetsInput
+  }
+  TimeSheetUpdateManyMutationInput: { // input type
+    elapsedTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    endTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    startTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TimeSheetUpdateManyWithWhereWithoutUserInput: { // input type
+    data: NexusGenInputs['TimeSheetUpdateManyMutationInput']; // TimeSheetUpdateManyMutationInput!
+    where: NexusGenInputs['TimeSheetScalarWhereInput']; // TimeSheetScalarWhereInput!
+  }
+  TimeSheetUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['TimeSheetWhereUniqueInput'][] | null; // [TimeSheetWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['TimeSheetCreateOrConnectWithoutUserInput'][] | null; // [TimeSheetCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['TimeSheetCreateWithoutUserInput'][] | null; // [TimeSheetCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['TimeSheetCreateManyUserInputEnvelope'] | null; // TimeSheetCreateManyUserInputEnvelope
+    delete?: NexusGenInputs['TimeSheetWhereUniqueInput'][] | null; // [TimeSheetWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['TimeSheetScalarWhereInput'][] | null; // [TimeSheetScalarWhereInput!]
+    disconnect?: NexusGenInputs['TimeSheetWhereUniqueInput'][] | null; // [TimeSheetWhereUniqueInput!]
+    set?: NexusGenInputs['TimeSheetWhereUniqueInput'][] | null; // [TimeSheetWhereUniqueInput!]
+    update?: NexusGenInputs['TimeSheetUpdateWithWhereUniqueWithoutUserInput'][] | null; // [TimeSheetUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['TimeSheetUpdateManyWithWhereWithoutUserInput'][] | null; // [TimeSheetUpdateManyWithWhereWithoutUserInput!]
+    upsert?: NexusGenInputs['TimeSheetUpsertWithWhereUniqueWithoutUserInput'][] | null; // [TimeSheetUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  TimeSheetUpdateOneRequiredWithoutCrumbsInput: { // input type
+    connect?: NexusGenInputs['TimeSheetWhereUniqueInput'] | null; // TimeSheetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TimeSheetCreateOrConnectWithoutCrumbsInput'] | null; // TimeSheetCreateOrConnectWithoutCrumbsInput
+    create?: NexusGenInputs['TimeSheetCreateWithoutCrumbsInput'] | null; // TimeSheetCreateWithoutCrumbsInput
+    update?: NexusGenInputs['TimeSheetUpdateWithoutCrumbsInput'] | null; // TimeSheetUpdateWithoutCrumbsInput
+    upsert?: NexusGenInputs['TimeSheetUpsertWithoutCrumbsInput'] | null; // TimeSheetUpsertWithoutCrumbsInput
+  }
+  TimeSheetUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['TimeSheetUpdateWithoutUserInput']; // TimeSheetUpdateWithoutUserInput!
+    where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+  }
+  TimeSheetUpdateWithoutCrumbsInput: { // input type
+    elapsedTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    endTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    startTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutTimesheetsInput'] | null; // UserUpdateOneRequiredWithoutTimesheetsInput
+  }
+  TimeSheetUpdateWithoutUserInput: { // input type
+    crumbs?: NexusGenInputs['CrumbUpdateManyWithoutTimeSheetInput'] | null; // CrumbUpdateManyWithoutTimeSheetInput
+    elapsedTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    endTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    startTime?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TimeSheetUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['TimeSheetCreateWithoutUserInput']; // TimeSheetCreateWithoutUserInput!
+    update: NexusGenInputs['TimeSheetUpdateWithoutUserInput']; // TimeSheetUpdateWithoutUserInput!
+    where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+  }
+  TimeSheetUpsertWithoutCrumbsInput: { // input type
+    create: NexusGenInputs['TimeSheetCreateWithoutCrumbsInput']; // TimeSheetCreateWithoutCrumbsInput!
+    update: NexusGenInputs['TimeSheetUpdateWithoutCrumbsInput']; // TimeSheetUpdateWithoutCrumbsInput!
+  }
+  TimeSheetWhereInput: { // input type
+    AND?: NexusGenInputs['TimeSheetWhereInput'][] | null; // [TimeSheetWhereInput!]
+    NOT?: NexusGenInputs['TimeSheetWhereInput'][] | null; // [TimeSheetWhereInput!]
+    OR?: NexusGenInputs['TimeSheetWhereInput'][] | null; // [TimeSheetWhereInput!]
+    crumbs?: NexusGenInputs['CrumbListRelationFilter'] | null; // CrumbListRelationFilter
+    elapsedTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    endTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    startTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  TimeSheetWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  UserCreateInput: { // input type
+    crumbs?: NexusGenInputs['CrumbCreateNestedManyWithoutUserInput'] | null; // CrumbCreateNestedManyWithoutUserInput
+    timesheets?: NexusGenInputs['TimeSheetCreateNestedManyWithoutUserInput'] | null; // TimeSheetCreateNestedManyWithoutUserInput
+  }
+  UserCreateNestedOneWithoutCrumbsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutCrumbsInput'] | null; // UserCreateOrConnectWithoutCrumbsInput
+    create?: NexusGenInputs['UserCreateWithoutCrumbsInput'] | null; // UserCreateWithoutCrumbsInput
+  }
+  UserCreateNestedOneWithoutTimesheetsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutTimesheetsInput'] | null; // UserCreateOrConnectWithoutTimesheetsInput
+    create?: NexusGenInputs['UserCreateWithoutTimesheetsInput'] | null; // UserCreateWithoutTimesheetsInput
+  }
+  UserCreateOrConnectWithoutCrumbsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutCrumbsInput']; // UserCreateWithoutCrumbsInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserCreateOrConnectWithoutTimesheetsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutTimesheetsInput']; // UserCreateWithoutTimesheetsInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserCreateWithoutCrumbsInput: { // input type
+    timesheets?: NexusGenInputs['TimeSheetCreateNestedManyWithoutUserInput'] | null; // TimeSheetCreateNestedManyWithoutUserInput
+  }
+  UserCreateWithoutTimesheetsInput: { // input type
+    crumbs?: NexusGenInputs['CrumbCreateNestedManyWithoutUserInput'] | null; // CrumbCreateNestedManyWithoutUserInput
+  }
+  UserOrderByInput: { // input type
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  UserUpdateInput: { // input type
+    crumbs?: NexusGenInputs['CrumbUpdateManyWithoutUserInput'] | null; // CrumbUpdateManyWithoutUserInput
+    timesheets?: NexusGenInputs['TimeSheetUpdateManyWithoutUserInput'] | null; // TimeSheetUpdateManyWithoutUserInput
+  }
+  UserUpdateOneRequiredWithoutCrumbsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutCrumbsInput'] | null; // UserCreateOrConnectWithoutCrumbsInput
+    create?: NexusGenInputs['UserCreateWithoutCrumbsInput'] | null; // UserCreateWithoutCrumbsInput
+    update?: NexusGenInputs['UserUpdateWithoutCrumbsInput'] | null; // UserUpdateWithoutCrumbsInput
+    upsert?: NexusGenInputs['UserUpsertWithoutCrumbsInput'] | null; // UserUpsertWithoutCrumbsInput
+  }
+  UserUpdateOneRequiredWithoutTimesheetsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutTimesheetsInput'] | null; // UserCreateOrConnectWithoutTimesheetsInput
+    create?: NexusGenInputs['UserCreateWithoutTimesheetsInput'] | null; // UserCreateWithoutTimesheetsInput
+    update?: NexusGenInputs['UserUpdateWithoutTimesheetsInput'] | null; // UserUpdateWithoutTimesheetsInput
+    upsert?: NexusGenInputs['UserUpsertWithoutTimesheetsInput'] | null; // UserUpsertWithoutTimesheetsInput
+  }
+  UserUpdateWithoutCrumbsInput: { // input type
+    timesheets?: NexusGenInputs['TimeSheetUpdateManyWithoutUserInput'] | null; // TimeSheetUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutTimesheetsInput: { // input type
+    crumbs?: NexusGenInputs['CrumbUpdateManyWithoutUserInput'] | null; // CrumbUpdateManyWithoutUserInput
+  }
+  UserUpsertWithoutCrumbsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutCrumbsInput']; // UserCreateWithoutCrumbsInput!
+    update: NexusGenInputs['UserUpdateWithoutCrumbsInput']; // UserUpdateWithoutCrumbsInput!
+  }
+  UserUpsertWithoutTimesheetsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutTimesheetsInput']; // UserCreateWithoutTimesheetsInput!
+    update: NexusGenInputs['UserUpdateWithoutTimesheetsInput']; // UserUpdateWithoutTimesheetsInput!
+  }
+  UserWhereInput: { // input type
+    AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    crumbs?: NexusGenInputs['CrumbListRelationFilter'] | null; // CrumbListRelationFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    timesheets?: NexusGenInputs['TimeSheetListRelationFilter'] | null; // TimeSheetListRelationFilter
+  }
+  UserWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
+  SortOrder: "asc" | "desc"
 }
 
 export interface NexusGenScalars {
@@ -39,26 +498,28 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  Date: any
+  DateTime: any
 }
 
 export interface NexusGenObjects {
+  AffectedRowsOutput: { // root type
+    count: number; // Int!
+  }
+  Crumb: { // root type
+    id: number; // Int!
+    lat: number; // Float!
+    lng: number; // Float!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+  }
   Mutation: {};
-  Post: { // root type
-    content?: string | null; // String
-    id?: number | null; // Int
-    published?: boolean | null; // Boolean
-    title?: string | null; // String
-  }
-  Profile: { // root type
-    bio?: string | null; // String
-    id: number; // Int!
-  }
   Query: {};
-  User: { // root type
-    email: string; // String!
+  TimeSheet: { // root type
+    endTime: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
-    name?: string | null; // String
+    startTime: NexusGenScalars['DateTime']; // DateTime!
+  }
+  User: { // root type
+    id: number; // Int!
   }
 }
 
@@ -70,113 +531,210 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
-  Mutation: { // field return type
-    addProfileForUser: NexusGenRootTypes['Profile'] | null; // Profile
-    createDraft: NexusGenRootTypes['Post'] | null; // Post
-    createNewProfile: NexusGenRootTypes['Profile'] | null; // Profile
-    deletePost: NexusGenRootTypes['Post'] | null; // Post
-    publish: NexusGenRootTypes['Post'] | null; // Post
-    signupUser: NexusGenRootTypes['User'] | null; // User
+  AffectedRowsOutput: { // field return type
+    count: number; // Int!
   }
-  Post: { // field return type
-    author: NexusGenRootTypes['User'] | null; // User
-    content: string | null; // String
-    id: number | null; // Int
-    published: boolean | null; // Boolean
-    title: string | null; // String
-  }
-  Profile: { // field return type
-    bio: string | null; // String
+  Crumb: { // field return type
     id: number; // Int!
-    user: NexusGenRootTypes['User'] | null; // User
+    lat: number; // Float!
+    lng: number; // Float!
+    timeSheet: NexusGenRootTypes['TimeSheet']; // TimeSheet!
+    timeStamp: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  Mutation: { // field return type
+    createOneCrumb: NexusGenRootTypes['Crumb']; // Crumb!
+    createOneTimeSheet: NexusGenRootTypes['TimeSheet']; // TimeSheet!
+    createOneUser: NexusGenRootTypes['User']; // User!
+    deleteManyCrumb: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
+    deleteManyTimeSheet: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
+    deleteOneCrumb: NexusGenRootTypes['Crumb'] | null; // Crumb
+    deleteOneTimeSheet: NexusGenRootTypes['TimeSheet'] | null; // TimeSheet
+    deleteOneUser: NexusGenRootTypes['User'] | null; // User
+    updateManyCrumb: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
+    updateManyTimeSheet: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
+    updateOneCrumb: NexusGenRootTypes['Crumb'] | null; // Crumb
+    updateOneTimeSheet: NexusGenRootTypes['TimeSheet'] | null; // TimeSheet
+    updateOneUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    drafts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
-    feed: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
-    filterPosts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
-    post: NexusGenRootTypes['Post'] | null; // Post
-    users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    crumb: NexusGenRootTypes['Crumb'] | null; // Crumb
+    crumbs: NexusGenRootTypes['Crumb'][]; // [Crumb!]!
+    timeSheet: NexusGenRootTypes['TimeSheet'] | null; // TimeSheet
+    timeSheets: NexusGenRootTypes['TimeSheet'][]; // [TimeSheet!]!
+    user: NexusGenRootTypes['User'] | null; // User
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  TimeSheet: { // field return type
+    crumbs: NexusGenRootTypes['Crumb'][]; // [Crumb!]!
+    elapsedTime: number | null; // Int
+    endTime: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    startTime: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
-    email: string; // String!
+    crumbs: NexusGenRootTypes['Crumb'][]; // [Crumb!]!
     id: number; // Int!
-    name: string | null; // String
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
-    profile: NexusGenRootTypes['Profile'] | null; // Profile
+    timesheets: NexusGenRootTypes['TimeSheet'][]; // [TimeSheet!]!
   }
 }
 
 export interface NexusGenFieldTypeNames {
-  Mutation: { // field return type name
-    addProfileForUser: 'Profile'
-    createDraft: 'Post'
-    createNewProfile: 'Profile'
-    deletePost: 'Post'
-    publish: 'Post'
-    signupUser: 'User'
+  AffectedRowsOutput: { // field return type name
+    count: 'Int'
   }
-  Post: { // field return type name
-    author: 'User'
-    content: 'String'
+  Crumb: { // field return type name
     id: 'Int'
-    published: 'Boolean'
-    title: 'String'
-  }
-  Profile: { // field return type name
-    bio: 'String'
-    id: 'Int'
+    lat: 'Float'
+    lng: 'Float'
+    timeSheet: 'TimeSheet'
+    timeStamp: 'DateTime'
     user: 'User'
   }
+  Mutation: { // field return type name
+    createOneCrumb: 'Crumb'
+    createOneTimeSheet: 'TimeSheet'
+    createOneUser: 'User'
+    deleteManyCrumb: 'AffectedRowsOutput'
+    deleteManyTimeSheet: 'AffectedRowsOutput'
+    deleteOneCrumb: 'Crumb'
+    deleteOneTimeSheet: 'TimeSheet'
+    deleteOneUser: 'User'
+    updateManyCrumb: 'AffectedRowsOutput'
+    updateManyTimeSheet: 'AffectedRowsOutput'
+    updateOneCrumb: 'Crumb'
+    updateOneTimeSheet: 'TimeSheet'
+    updateOneUser: 'User'
+  }
   Query: { // field return type name
-    drafts: 'Post'
-    feed: 'Post'
-    filterPosts: 'Post'
-    post: 'Post'
+    crumb: 'Crumb'
+    crumbs: 'Crumb'
+    timeSheet: 'TimeSheet'
+    timeSheets: 'TimeSheet'
+    user: 'User'
     users: 'User'
   }
-  User: { // field return type name
-    email: 'String'
+  TimeSheet: { // field return type name
+    crumbs: 'Crumb'
+    elapsedTime: 'Int'
+    endTime: 'DateTime'
     id: 'Int'
-    name: 'String'
-    posts: 'Post'
-    profile: 'Profile'
+    startTime: 'DateTime'
+    user: 'User'
+  }
+  User: { // field return type name
+    crumbs: 'Crumb'
+    id: 'Int'
+    timesheets: 'TimeSheet'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    addProfileForUser: { // args
-      bio?: string | null; // String
-      email?: string | null; // String
+    createOneCrumb: { // args
+      data: NexusGenInputs['CrumbCreateInput']; // CrumbCreateInput!
     }
-    createDraft: { // args
-      authorEmail?: string | null; // String
-      content?: string | null; // String
-      title: string; // String!
+    createOneTimeSheet: { // args
+      data: NexusGenInputs['TimeSheetCreateInput']; // TimeSheetCreateInput!
     }
-    createNewProfile: { // args
-      bio?: string | null; // String
+    createOneUser: { // args
+      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
-    deletePost: { // args
-      postId?: string | null; // String
+    deleteManyCrumb: { // args
+      where?: NexusGenInputs['CrumbWhereInput'] | null; // CrumbWhereInput
     }
-    publish: { // args
-      postId?: string | null; // String
+    deleteManyTimeSheet: { // args
+      where?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
     }
-    signupUser: { // args
-      email: string; // String!
-      name?: string | null; // String
+    deleteOneCrumb: { // args
+      where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+    }
+    deleteOneTimeSheet: { // args
+      where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+    }
+    deleteOneUser: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    updateManyCrumb: { // args
+      data: NexusGenInputs['CrumbUpdateManyMutationInput']; // CrumbUpdateManyMutationInput!
+      where?: NexusGenInputs['CrumbWhereInput'] | null; // CrumbWhereInput
+    }
+    updateManyTimeSheet: { // args
+      data: NexusGenInputs['TimeSheetUpdateManyMutationInput']; // TimeSheetUpdateManyMutationInput!
+      where?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
+    }
+    updateOneCrumb: { // args
+      data: NexusGenInputs['CrumbUpdateInput']; // CrumbUpdateInput!
+      where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
+    }
+    updateOneTimeSheet: { // args
+      data: NexusGenInputs['TimeSheetUpdateInput']; // TimeSheetUpdateInput!
+      where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+    }
+    updateOneUser: { // args
+      data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
   Query: {
-    filterPosts: { // args
-      searchString?: string | null; // String
+    crumb: { // args
+      where: NexusGenInputs['CrumbWhereUniqueInput']; // CrumbWhereUniqueInput!
     }
-    post: { // args
-      postId: string; // String!
+    crumbs: { // args
+      after?: NexusGenInputs['CrumbWhereUniqueInput'] | null; // CrumbWhereUniqueInput
+      before?: NexusGenInputs['CrumbWhereUniqueInput'] | null; // CrumbWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['CrumbOrderByInput'][] | null; // [CrumbOrderByInput!]
+      where?: NexusGenInputs['CrumbWhereInput'] | null; // CrumbWhereInput
+    }
+    timeSheet: { // args
+      where: NexusGenInputs['TimeSheetWhereUniqueInput']; // TimeSheetWhereUniqueInput!
+    }
+    timeSheets: { // args
+      after?: NexusGenInputs['TimeSheetWhereUniqueInput'] | null; // TimeSheetWhereUniqueInput
+      before?: NexusGenInputs['TimeSheetWhereUniqueInput'] | null; // TimeSheetWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['TimeSheetOrderByInput'][] | null; // [TimeSheetOrderByInput!]
+      where?: NexusGenInputs['TimeSheetWhereInput'] | null; // TimeSheetWhereInput
+    }
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    users: { // args
+      after?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      before?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+  }
+  TimeSheet: {
+    crumbs: { // args
+      after?: NexusGenInputs['CrumbWhereUniqueInput'] | null; // CrumbWhereUniqueInput
+      before?: NexusGenInputs['CrumbWhereUniqueInput'] | null; // CrumbWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+  }
+  User: {
+    crumbs: { // args
+      after?: NexusGenInputs['CrumbWhereUniqueInput'] | null; // CrumbWhereUniqueInput
+      before?: NexusGenInputs['CrumbWhereUniqueInput'] | null; // CrumbWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    timesheets: { // args
+      after?: NexusGenInputs['TimeSheetWhereUniqueInput'] | null; // TimeSheetWhereUniqueInput
+      before?: NexusGenInputs['TimeSheetWhereUniqueInput'] | null; // TimeSheetWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
   }
 }
@@ -189,9 +747,9 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 
@@ -240,6 +798,8 @@ export interface NexusGenTypes {
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
+  }
+  interface NexusGenPluginInputTypeConfig<TypeName extends string> {
   }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
   }
